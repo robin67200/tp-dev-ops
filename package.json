@@ -94,6 +94,7 @@
     "bootstrap": "4.6.0",
     "dayjs": "1.10.4",
     "docker-compose": "^0.23.8",
+    "e2e": "^0.0.8",
     "ngx-infinite-scroll": "10.0.1",
     "ngx-webstorage": "7.0.1",
     "rxjs": "6.6.7",
