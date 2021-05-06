@@ -42,11 +42,11 @@ jobs:
       - name: create database and execute .jar file
         run: npm run ci:e2e:prepare:docker
 
-      - name: webdrive update
-        run: npm run webdriver-manager update
+      # - name: webdrive update
+      #   run: npm run webdriver-manager update
 
-      - name: webdrive update
-        run: npm run webdriver-manager start
+      # - name: webdrive update
+      #   run: npm run webdriver-manager start
 
       - name: execute test
         run: npm run ci:e2e:run
