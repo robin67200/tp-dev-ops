@@ -48,7 +48,7 @@ jobs:
       - name: stop docker process
         run: npm run ci:e2e:teardown
 
-      # # test for back end
+      # # test for back endd
       # - name: back_end test
       #   run: chmod +x mvnw && npm run ci:backend:test
 
