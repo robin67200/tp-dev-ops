@@ -36,6 +36,18 @@ jobs:
       - name: Install node.js packages
         run: npm install
 
+      - name: Create .jar file
+        run: ./mvnw -ntp verify -DskipTests --batch-mode "-Pprod" "-Pe2e" "-Denforcer.skip=true"
+
+      - name: create database and execute .jar file
+        run: npm run ci:e2e:prepare:docker
+
+      - name: execute test
+        run: npm run ci:e2e:run
+
+      - name: stop docker process
+        run: npm run ci:e2e:teardown
+
       # # test for back end
       # - name: back_end test
       #   run: chmod +x mvnw && npm run ci:backend:test
