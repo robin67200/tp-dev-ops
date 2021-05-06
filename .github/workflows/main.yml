@@ -36,9 +36,9 @@ jobs:
       - name: Install node.js packages
         run: npm install
 
-      # test for back end
-      - name: back_end test
-        run: chmod +x mvnw && npm run ci:backend:test
+      # # test for back end
+      # - name: back_end test
+      #   run: chmod +x mvnw && npm run ci:backend:test
 
       # # Runs a single command using the runners shell
       # - name: Run a one-line script
