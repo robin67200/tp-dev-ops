@@ -19,7 +19,7 @@ exports.config = {
 
   directConnect: true,
 
-  baseUrl: 'http://10.1.0.50:8080/',
+  baseUrl: 'https://github.com/robin67200/tp-dev-ops/tree/main',
 
   framework: 'mocha',
 
