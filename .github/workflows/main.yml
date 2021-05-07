@@ -36,23 +36,29 @@ jobs:
       - name: Install node.js packages
         run: npm install
 
+      - name: execute back
+        run: chmod +x mvnw && npm run ci:backend:test
+
+      - name: execute front
+        run: npm run ci:frontend:test
+
       - name: Create .jar file
         run: ./mvnw -ntp verify -DskipTests --batch-mode "-Pprod" "-Pe2e" "-Denforcer.skip=true"
 
       - name: create database and execute .jar file
         run: npm run ci:e2e:prepare:docker
 
-      # - name: webdrive update
-      #   run: npm run webdriver-manager update
-
-      # - name: webdrive update
-      #   run: npm run webdriver-manager start
-
       - name: execute test
         run: npm run ci:e2e:run
 
       - name: stop docker process
         run: npm run ci:e2e:teardown
+
+      # - name: webdrive update
+      #   run: npm run webdriver-manager update
+
+      # - name: webdrive update
+      #   run: npm run webdriver-manager start
 
       # # test for back endd
       # - name: back_end test
