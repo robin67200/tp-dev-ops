@@ -37,7 +37,8 @@ jobs:
         run: npm install
 
       - name: execute back
-        run: chmod +x mvnw && npm run ci:backend:test
+        run: chmod +x mvnw
+        run: npm run ci:backend:test
 
       - name: execute front
         run: npm run ci:frontend:test
