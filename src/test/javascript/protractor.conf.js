@@ -1,5 +1,3 @@
-const { SpecReporter } = require('jasmine-spec-reporter');
-
 exports.config = {
   allScriptsTimeout: 20000,
 
@@ -20,13 +18,17 @@ exports.config = {
 
   directConnect: true,
 
-  baseUrl: 'https://google.com/',
+  baseUrl: 'http://localhost:8080/',
 
-  framework: 'jasmine',
-  jasmineNodeOpts: {
-    showColors: true,
-    defaultTimeoutInterval: 30000,
-    print: function () {},
+  framework: 'mocha',
+
+  SELENIUM_PROMISE_MANAGER: false,
+
+  mochaOpts: {
+    reporter: 'spec',
+    slow: 3000,
+    ui: 'bdd',
+    timeout: 720000,
   },
 
   beforeLaunch: function () {
