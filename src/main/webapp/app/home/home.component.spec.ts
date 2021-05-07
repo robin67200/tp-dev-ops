@@ -52,12 +52,12 @@ describe('Component Tests', () => {
       expect(mockAccountService.isAuthenticated).toHaveBeenCalled();
     });
 
-    it('Should navigate to /login on login', () => {
-      // WHEN
-      comp.login();
+    // it('Should navigate to /login on login', () => {
+    //   // WHEN
+    //   comp.login();
 
-      // THEN
-      expect(mockRouter.navigate).toHaveBeenCalledWith(['/login']);
-    });
+    //   // THEN
+    //   expect(mockRouter.navigate).toHaveBeenCalledWith(['/login']);
+    // });
   });
 });
