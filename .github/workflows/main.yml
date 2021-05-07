@@ -38,6 +38,8 @@ jobs:
 
       - name: execute back
         run: chmod +x mvnw
+
+      - name: execute back
         run: npm run ci:backend:test
 
       - name: execute front
