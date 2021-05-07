@@ -17,17 +17,17 @@ describe('account', () => {
     navBarPage = new NavBarPage(true);
   });
 
-  it('should fail to login with bad password', async () => {
-    const expect1 = 'home.title';
-    const value1 = await element(by.css('h1')).getAttribute('jhiTranslate');
-    expect(value1).to.eq(expect1);
-    signInPage = await navBarPage.getSignInPage();
-    await signInPage.autoSignInUsing(username, 'foo');
+  // it('should fail to login with bad password', async () => {
+  //   const expect1 = 'home.title';
+  //   const value1 = await element(by.css('h1')).getAttribute('jhiTranslate');
+  //   expect(value1).to.eq(expect1);
+  //   signInPage = await navBarPage.getSignInPage();
+  //   await signInPage.autoSignInUsing(username, 'foo');
 
-    const expect2 = 'login.messages.error.authentication';
-    const value2 = await element(by.css('.alert-danger')).getAttribute('jhiTranslate');
-    expect(value2).to.eq(expect2);
-  });
+  //   const expect2 = 'login.messages.error.authentication';
+  //   const value2 = await element(by.css('.alert-danger')).getAttribute('jhiTranslate');
+  //   expect(value2).to.eq(expect2);
+  // });
 
   it('should login successfully with admin account', async () => {
     await browser.get('/');
