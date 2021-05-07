@@ -46,6 +46,9 @@
     "skipFakeData": false,
     "pages": [],
     "nativeLanguage": "en",
-    "entities": ["BankAccount", "Label", "Operation"]
+    "entities": ["BankAccount", "Label", "Operation"],
+    "herokuAppName": "tpdeploiementjejerobinmax",
+    "herokuDeployType": "jar",
+    "herokuJavaVersion": "11"
   }
 }
