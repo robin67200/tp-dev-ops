@@ -1,3 +1,5 @@
+const { SpecReporter } = require('jasmine-spec-reporter');
+
 exports.config = {
   allScriptsTimeout: 20000,
 
@@ -11,9 +13,8 @@ exports.config = {
   capabilities: {
     browserName: 'chrome',
     chromeOptions: {
-      args: process.env.JHI_E2E_HEADLESS
-        ? ['--headless', '--disable-gpu', '--window-size=800,600', '--no-sandbox', '--disable-dev-shm-usage']
-        : ['--disable-gpu', '--window-size=800,600', '--no-sandbox', '--disable-dev-shm-usage'],
+      binary: process.env.CHROME_BIN,
+      args: ['--headless', '--no-sandbox'],
     },
   },
 
@@ -21,15 +22,11 @@ exports.config = {
 
   baseUrl: 'https://google.com/',
 
-  framework: 'mocha',
-
-  SELENIUM_PROMISE_MANAGER: false,
-
-  mochaOpts: {
-    reporter: 'spec',
-    slow: 3000,
-    ui: 'bdd',
-    timeout: 720000,
+  framework: 'jasmine',
+  jasmineNodeOpts: {
+    showColors: true,
+    defaultTimeoutInterval: 30000,
+    print: function () {},
   },
 
   beforeLaunch: function () {
