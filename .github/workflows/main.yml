@@ -75,7 +75,7 @@ jobs:
           run: npm run webdriver-manager start
 
   deploy:
-    needs: ic
+  needs: ic
       steps:
         - uses: actions/checkout@v2
         - uses: actions/setup-node@v1
