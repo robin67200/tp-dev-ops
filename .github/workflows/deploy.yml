@@ -27,6 +27,6 @@ jobs:
 
       - uses: AkhileshNS/heroku-deploy@v3.12.12
         with:
-          heroku_api_key: ${{533c1b61-0466-4b77-95aa-b14f764287ab}}
+          heroku_api_key: "533c1b61-0466-4b77-95aa-b14f764287ab"
           heroku_app_name: "tpril" #Must be unique in Heroku
           heroku_email: "rrobin-vilmus@hotmail.com"
