@@ -49,9 +49,9 @@ jobs:
     needs: job1
     runs-on: ubuntu-latest
     steps:
-    
+
     - name: excute job 2
-          run: echo job 2
+      run: echo job 2
         # - name: configure execution authorization
         #   run: chmod +x mvnw
 
