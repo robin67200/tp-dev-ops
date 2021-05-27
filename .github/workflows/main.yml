@@ -45,27 +45,31 @@ jobs:
       - name: execute front unit test
         run: npm run ci:frontend:test
 
+        # Prépare un .jar comme si il partait en prod
       - name: Create .jar file
         run: ./mvnw -ntp verify -DskipTests --batch-mode "-Pprod" "-Pe2e" "-Denforcer.skip=true"
 
+        # Créé une BDD et lance le .jar dans un docker
       - name: create database and execute .jar file
         run: npm run ci:e2e:prepare:docker
 
+        #Lance les tests
       - name: execute test
         run: npm run ci:e2e:run
 
+        # Met fin au docker et nettoie le tout.
       - name: stop docker process
         run: npm run ci:e2e:teardown
 
-      # - name: webdrive update
-      #   run: npm run webdriver-manager update
+      - name: webdrive update
+        run: npm run webdriver-manager update
 
-      # - name: webdrive update
-      #   run: npm run webdriver-manager start
+      - name: webdrive update
+        run: npm run webdriver-manager start
 
-      # # test for back endd
-      # - name: back_end test
-      #   run: chmod +x mvnw && npm run ci:backend:test
+      # test for back end
+      - name: back_end test
+        run: chmod +x mvnw && npm run ci:backend:test
 
       # # Runs a single command using the runners shell
       # - name: Run a one-line script
