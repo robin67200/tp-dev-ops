@@ -1,4 +1,5 @@
 # This is a basic workflow to help you get started with Actions
+# if: ${{ success() }}
 
 name: IC
 
@@ -17,72 +18,68 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-            node-version: 14.16.1
+  job_one:
+    name: Job One
+    # This workflow contains a single job called "build"
+    build:
+      # The type of runner that the job will run on
+      runs-on: ubuntu-latest
 
-      - uses: actions/setup-java@v1
-        with:
-            java-version: '11.x'
+      # Steps represent a sequence of tasks that will be executed as part of the job
+      steps:
+        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        - uses: actions/checkout@v2
+        - uses: actions/setup-node@v1
+          with:
+              node-version: 14.16.1
 
-
-      # Runs a single command using the runners shelll ss
-      - name: Install node.js packages
-        if: ${{ success() }}
-        run: npm install
+        - uses: actions/setup-java@v1
+          with:
+              java-version: '11.x'
 
 
+        # Runs a single command using the runners shelll ss
+        - name: Install node.js packages
+          run: npm install
 
-      # - name: configure execution authorization
-      #   run: chmod +x mvnw
+  job_two:
+    needs: [job_one]
+    name: Job Two
+    # This workflow contains a single job called "build"
+    build:
+      # The type of runner that the job will run on
+      runs-on: ubuntu-latest
 
-      # - name: execute java unit test
-      #   run: npm run ci:backend:test
+        - name: configure execution authorization
+          run: chmod +x mvnw
 
-      # - name: execute front unit test
-      #   run: npm run ci:frontend:test
+        - name: execute java unit test
+          run: npm run ci:backend:test
 
-      #   # Prépare un .jar comme si il partait en prod
-      # - name: Create .jar file
-      #   run: ./mvnw -ntp verify -DskipTests --batch-mode "-Pprod" "-Pe2e" "-Denforcer.skip=true"
+        - name: execute front unit test
+          run: npm run ci:frontend:test
 
-      #   # Créé une BDD et lance le .jar dans un docker
-      # - name: create database and execute .jar file
-      #   run: npm run ci:e2e:prepare:docker
+          # Prépare un .jar comme si il partait en prod
+        - name: Create .jar file
+          run: ./mvnw -ntp verify -DskipTests --batch-mode "-Pprod" "-Pe2e" "-Denforcer.skip=true"
 
-      #   #Lance les tests
-      # - name: execute test
-      #   run: npm run ci:e2e:run
+          # Créé une BDD et lance le .jar dans un docker
+        - name: create database and execute .jar file
+          run: npm run ci:e2e:prepare:docker
 
-      #   # Met fin au docker et nettoie le tout.
-      # - name: stop docker process
-      #   run: npm run ci:e2e:teardown
+          #Lance les tests
+        - name: execute test
+          run: npm run ci:e2e:run
 
-      # - name: webdrive update
-      #   run: npm run webdriver-manager update
+          # Met fin au docker et nettoie le tout.
+        - name: stop docker process
+          run: npm run ci:e2e:teardown
 
-      # - name: webdrive update
-      #   run: npm run webdriver-manager start
+        - name: webdrive update
+          run: npm run webdriver-manager update
 
-      # # test for back end
-      # - name: back_end test
-      #   run: chmod +x mvnw && npm run ci:backend:test
+        - name: webdrive update
+          run: npm run webdriver-manager start
 
-      # # Runs a single command using the runners shell
-      # - name: Run a one-line script
-      #   run: echo Hello, world!
 
-      # # Runs a set of commands using the runners shell
-      # - name: Run a multi-line script
-      #   run: |
-      #     echo Add other actions to build,
-      #     echo test, and deploy your project.
