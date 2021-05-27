@@ -32,7 +32,7 @@ jobs:
         with:
             java-version: '11.x'
 
-      # # Runs a single command using the runners shelll s
+      # # Runs a single command using the runners shelll ss
       # - name: Install node.js packages
       #   run: npm install
 
