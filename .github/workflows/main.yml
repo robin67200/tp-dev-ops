@@ -20,11 +20,6 @@ on:
 jobs:
 
   ic:
-    # This workflow contains a single job called "build"
-    # build:
-    #   # The type of runner that the job will run on
-
-
     #   # Steps represent a sequence of tasks that will be executed as part of the job
       runs-on: ubuntu-latest
       steps:
@@ -67,12 +62,6 @@ jobs:
           # Met fin au docker et nettoie le tout.
         - name: stop docker process
           run: npm run ci:e2e:teardown
-
-        - name: webdrive update
-          run: npm run webdriver-manager update
-
-        - name: webdrive update
-          run: npm run webdriver-manager start
 
   deploy:
     needs: ic
