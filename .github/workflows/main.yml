@@ -9,8 +9,8 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-  if success: echo "success"
-    
+
+
 
   # Allows you to run this workflow manually from the Actions tabb
   workflow_dispatch:
@@ -38,6 +38,7 @@ jobs:
       # Runs a single command using the runners shelll ss
       - name: Install node.js packages
         run: npm install
+        if success: echo "success"
 
 
 
