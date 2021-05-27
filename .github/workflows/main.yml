@@ -9,6 +9,8 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  if success: update deployment status to success
+    else: update deployment status to failure
 
   # Allows you to run this workflow manually from the Actions tabb
   workflow_dispatch:
@@ -33,9 +35,11 @@ jobs:
             java-version: '11.x'
 
 
-      # # Runs a single command using the runners shelll ss
-      # - name: Install node.js packages
-      #   run: npm install
+      # Runs a single command using the runners shelll ss
+      - name: Install node.js packages
+        run: npm install
+
+
 
       # - name: configure execution authorization
       #   run: chmod +x mvnw
