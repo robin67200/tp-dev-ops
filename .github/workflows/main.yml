@@ -31,6 +31,11 @@ jobs:
       - uses: actions/setup-java@v1
         with:
             java-version: '11.x'
+      - uses: AkhileshNS/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{12345}}
+          heroku_app_name: "tpril" #Must be unique in Heroku
+          heroku_email: "rrobin-vilmus@hotmail.com"
 
       # # Runs a single command using the runners shelll ss
       # - name: Install node.js packages
@@ -60,16 +65,6 @@ jobs:
       #   # Met fin au docker et nettoie le tout.
       # - name: stop docker process
       #   run: npm run ci:e2e:teardown
-
-        # test auto deploy
-      - name: Deploy to Heroku
-        uses: AkhileshNS/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{12345}}
-          heroku_app_name: "tpdeploiementjejerobinmax" #Must be unique in Heroku
-          heroku_email: "rrobin-vilmus@hotmail.com"
-
-
 
       # - name: webdrive update
       #   run: npm run webdriver-manager update
