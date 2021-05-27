@@ -61,15 +61,15 @@ jobs:
       - name: stop docker process
         run: npm run ci:e2e:teardown
 
-      - name: webdrive update
-        run: npm run webdriver-manager update
+      # - name: webdrive update
+      #   run: npm run webdriver-manager update
 
-      - name: webdrive update
-        run: npm run webdriver-manager start
+      # - name: webdrive update
+      #   run: npm run webdriver-manager start
 
-      # test for back end
-      - name: back_end test
-        run: chmod +x mvnw && npm run ci:backend:test
+      # # test for back end
+      # - name: back_end test
+      #   run: chmod +x mvnw && npm run ci:backend:test
 
       # # Runs a single command using the runners shell
       # - name: Run a one-line script
