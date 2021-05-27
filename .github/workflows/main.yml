@@ -46,9 +46,7 @@ jobs:
   job_two:
     needs: [job_one]
     name: Job Two
-    # This workflow contains a single job called "build"
-    
-      steps:
+    steps:
 
         - name: configure execution authorization
           run: chmod +x mvnw
