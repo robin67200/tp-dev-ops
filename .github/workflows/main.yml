@@ -32,9 +32,9 @@ jobs:
         with:
             java-version: '11.x'
 
-      # Runs a single command using the runners shelll
-      - name: Install node.js packages
-        run: npm install
+      # # Runs a single command using the runners shelll
+      # - name: Install node.js packages
+      #   run: npm install
 
       # - name: configure execution authorization
       #   run: chmod +x mvnw
@@ -61,7 +61,7 @@ jobs:
       # - name: stop docker process
       #   run: npm run ci:e2e:teardown
 
-        # test auto deploy 
+        # test auto deploy
       - name: Deploy to Heroku
         uses: AkhileshNS/heroku-deploy@v3.12.12
         with:
