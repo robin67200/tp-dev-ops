@@ -38,7 +38,7 @@ jobs:
       # Runs a single command using the runners shelll ss
       - name: Install node.js packages
         run: npm install
-        if success: echo "success"
+        if: ${{ success() }}: echo "success"
 
 
 
