@@ -20,53 +20,9 @@ on:
 jobs:
 
   ic:
-    #   # Steps represent a sequence of tasks that will be executed as part of the job
-      runs-on: ubuntu-latest
-      steps:
-        # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-        - uses: actions/checkout@v2
-        - uses: actions/setup-node@v1
-          with:
-              node-version: 14.16.1
-
-        - uses: actions/setup-java@v1
-          with:
-              java-version: '11.x'
-
-
-        # Runs a single command using the runners shelll ss
-        - name: Install node.js packages
-          run: npm install
-
-        - name: configure execution authorization
-          run: chmod +x mvnw
-
-        - name: execute java unit test
-          run: npm run ci:backend:test
-
-        - name: execute front unit test
-          run: npm run ci:frontend:test
-
-          # Prépare un .jar comme si il partait en prod
-        - name: Create .jar file
-          run: ./mvnw -ntp verify -DskipTests --batch-mode "-Pprod" "-Pe2e" "-Denforcer.skip=true"
-
-          # Créé une BDD et lance le .jar dans un docker
-        - name: create database and execute .jar file
-          run: npm run ci:e2e:prepare:docker
-
-          #Lance les tests
-        - name: execute test
-          run: npm run ci:e2e:run
-
-          # Met fin au docker et nettoie le tout.
-        - name: stop docker process
-          run: npm run ci:e2e:teardown
-
-  deploy:
-    needs: ic
     runs-on: ubuntu-latest
     steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
@@ -76,11 +32,78 @@ jobs:
         with:
             java-version: '11.x'
 
-      - uses: AkhileshNS/heroku-deploy@v3.12.12
+      # # Runs a single command using the runners shelll ss
+      # - name: Install node.js packages
+      #   run: npm install
+
+      # - name: configure execution authorization
+      #   run: chmod +x mvnw
+
+      # - name: execute java unit test
+      #   run: npm run ci:backend:test
+
+      # - name: execute front unit test
+      #   run: npm run ci:frontend:test
+
+      # # create .jar comme as he goes in production
+      # - name: Create .jar file
+      #   run: ./mvnw -ntp verify -DskipTests --batch-mode "-Pprod" "-Pe2e" "-Denforcer.skip=true"
+
+      # - name: create database and execute .jar file
+      #   run: npm run ci:e2e:prepare:docker
+
+      # - name: execute test
+      #   run: npm run ci:e2e:run
+
+      # - name: stop docker process
+      #   run: npm run ci:e2e:teardown
+
+  sonar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
         with:
-            heroku_api_key: "533c1b61-0466-4b77-95aa-b14f764287ab"
-            heroku_app_name: "tpril" #Must be unique in Heroku
-            heroku_email: "rrobin-vilmus@hotmail.com"
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache Maven packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+
+  # deploy:
+  #   needs: sonar
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/setup-node@v1
+  #       with:
+  #           node-version: 14.16.1
+
+  #     - uses: actions/setup-java@v1
+  #       with:
+  #           java-version: '11.x'
+
+      # - uses: AkhileshNS/heroku-deploy@v3.12.12
+      #   with:
+      #       heroku_api_key: "533c1b61-0466-4b77-95aa-b14f764287ab"
+      #       heroku_app_name: "tpril" #Must be unique in Heroku
+      #       heroku_email: "rrobin-vilmus@hotmail.com"
 
 
 

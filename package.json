@@ -78,6 +78,8 @@
     "packaging": "jar"
   },
   "dependencies": {
+    "@actions/core": "^1.2.7",
+    "@actions/github": "^4.0.0",
     "@angular/common": "11.2.7",
     "@angular/compiler": "11.2.7",
     "@angular/core": "11.2.7",
