@@ -91,13 +91,16 @@
 #       #       heroku_api_key: "533c1b61-0466-4b77-95aa-b14f764287ab"
 #       #       heroku_app_name: "tpril" #Must be unique in Heroku
 #       #       heroku_email: "rrobin-vilmus@hotmail.com"
-name: Build
+name: IC
+
+# Controls when the action will run.
 on:
+  # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
-    types: [opened, synchronize, reopened]
+    branches: [ main ]
+
 jobs:
   build:
     name: Build
