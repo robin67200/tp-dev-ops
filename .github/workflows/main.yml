@@ -82,8 +82,8 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: Build and analyze
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: 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
+          SONAR_TOKEN: a2c556936cb882c6ee105f462fe691fc341db1ab
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
 
   # deploy:
